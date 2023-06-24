@@ -1,0 +1,37 @@
+/JOB
+//NAME JOB5A2
+//POS
+///NPOS 0,0,0,0,0,0
+///USER 9
+///TOOL 0
+///POSTYPE USER
+///RECTAN
+///RCONF 0,0,0,0,0,0,0,0
+P000=60.000,90.000,50.000,0.00,0.00,0.00
+P001=180.000,90.000,50.000,0.00,0.00,0.00
+P091=0.000,0.000,20.000,0.00,0.00,0.00
+//INST
+///DATE 2018/02/02 16:42
+///COMM OPDR1
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+SET B30 0
+'aantal blokjes gestapeld
+*stack
+'begin stack loop
+MOVL P000 V=100.0
+'ga naar beginpositie
+CALL JOB:PICK
+'oppakken
+MOVL P001 V=100.0
+'beweeg naar stapel positie
+CALL JOB:PLACE
+'wegzetten
+ADD P001 P091
+'voeg de hoogte van n blokje (p91 waar z = 20mm) toe aan p1
+INC B030
+'blokjesGestapeld++
+JUMP *stack IF B030 < 3
+'ga door tenzij blokjesGestapeld niet meer kleiner is dan 3
+END

@@ -1,0 +1,43 @@
+/JOB
+//NAME OPDR2
+//POS
+///NPOS 0,0,0,1,0,0
+///USER 1
+///TOOL 1
+///POSTYPE USER
+///RECTAN
+///RCONF 0,0,0,0,0,0,0,0
+P0000=60.000,90.000,40.000,0.00,0.00,0.00
+P0001=60.000,190.000,40.000,0.00,0.00,0.00
+P0002=180.000,90.000,40.000,0.00,0.00,0.00
+P0003=180.000,190.000,40.000,0.00,0.00,0.00
+P0004=300.000,90.000,40.000,0.00,0.00,0.00
+P0005=300.000,190.000,40.000,0.00,0.00,0.00
+//INST
+///DATE 2023/05/15 21:47
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+MOVJ P000 VJ=50.00
+'ga naar startpunt
+CALL JOB:PICK
+MOVL P001 V=23.00 PL=0
+'ga naar plek om neer te zetten
+CALL JOB:PLACE
+'neerzetten
+MOVL P002 V=23.00 PL=0
+'volgende plek om op te pakken
+CALL JOB:PICK
+MOVL P003 V=23.00 PL=0
+'naar plek om neer te zetten
+CALL JOB:PLACE
+'neerzetten
+MOVL P004 V=23.00 PL=0
+'naar plek om weer op te pakken
+CALL JOB:PICK
+'oppakken
+MOVL P005 V=23.00 PL=0
+'naar plek om neer te zetten
+CALL JOB:PLACE
+'neerzetten
+END

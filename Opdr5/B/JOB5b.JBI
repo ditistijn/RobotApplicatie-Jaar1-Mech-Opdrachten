@@ -1,0 +1,70 @@
+/JOB
+//NAME OPDR5b
+//POS
+///NPOS 0,0,0,1,0,0
+///USER 9
+///TOOL 0
+///POSTYPE USER
+///RECTAN
+///RCONF 0,0,0,0,0,0,0,0
+P0000=60.000,90.000,50.000,0.00,0.00,0.00
+P0001=60.000,190.000,50.000,0.00,0.00,0.00
+P0002=180.000,90.000,50.000,0.00,0.00,0.00
+P0003=180.000,190.000,50.000,0.00,0.00,0.00
+P0004=300.000,90.000,50.000,0.00,0.00,0.00
+P0005=300.000,190.000,50.000,0.00,0.00,0.00
+P0091=0.000,100.000,0.000,0.00,0.00,0.00
+//INST
+///DATE 2023/05/15 21:47
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+MOVJ P000 VJ=50.00
+'startpositie
+CALL JOB:PICK
+'oppakken
+SFTON P0091 UF#(9)
+'shift 100mm in de y as
+MOVL P000 V=1500.0 PL=0
+'beweeg naar startpositie, maar is geshift naar 100mm in de y as
+CALL JOB:PLACE
+'wegzetten
+SFTOF
+'shift uit
+MOVL P002 V=1500.0 PL=0
+'ga naar positie , shift staat uit dus is weer op onderste rij
+CALL JOB:PICK
+SFTON P0091 UF#(9)
+MOVL P002 V=100.0 PL=0
+'beweeg naar startpositie, maar is geshift naar 100mm in de y as
+CALL JOB:PLACE
+SFTOF
+MOVL P004 V=1500.0 PL=0
+'ga naar positie , shift staat uit dus is weer op onderste rij
+CALL JOB:PICK
+SFTON P0091 UF#(9)
+MOVL P004 V=1500.0 PL=0
+'beweeg naar startpositie, maar is geshift naar 100mm in de y as
+CALL JOB:PLACE
+CALL JOB:PICK
+SFTOF
+MOVL P004 V=1500.0 PL=0
+'ga naar positie , shift staat uit dus is weer op onderste rij
+CALL JOB:PLACE
+SFTON P0091 UF#(9)
+MOVL P002 V=1500.0 PL=0
+'beweeg naar startpositie, maar is geshift naar 100mm in de y as
+CALL JOB:PICK
+SFTOF
+MOVL P002 V=1500.0 PL=0
+'ga naar positie , shift staat uit dus is weer op onderste rij
+CALL JOB:PLACE
+SFTON P0091 UF#(9)
+MOVL P000 V=1500.0 PL=0
+'beweeg naar startpositie, maar is geshift naar 100mm in de y as
+CALL JOB:PICK
+SFTOF
+MOVL P000 V=1500.0 PL=0
+'ga naar positie , shift staat uit dus is weer op onderste rij
+CALL JOB:PLACE
+END

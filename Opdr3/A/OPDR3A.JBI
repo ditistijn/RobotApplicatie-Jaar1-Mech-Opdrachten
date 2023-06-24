@@ -1,0 +1,26 @@
+/JOB
+//NAME OPDR3A
+//POS
+///NPOS 0,0,0,0,0,0
+//INST
+///DATE 2023/05/15 22:23
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+SET R000 10
+'r0 = 10
+SET D000 10
+'d0 = 10
+SET I000 10
+'i0 = 10
+SET R001 R000
+'r1=r0 (=10)
+SET D001 D000
+'d1=d0 (=10)
+SET I001 I000
+'i1=i0 (=10)
+SET D003 57565634
+'d3 = 57565634
+SET B003 D003
+'b3 = d3 (=overflow dus max 254 maar geeft foutmelding)
+END

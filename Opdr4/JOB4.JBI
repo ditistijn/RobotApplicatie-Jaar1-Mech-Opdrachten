@@ -1,0 +1,43 @@
+/JOB
+//NAME JOB4
+//POS
+///NPOS 0,0,0,2,0,0
+///USER 9
+///TOOL 0
+///POSTYPE USER
+///RECTAN
+///RCONF 0,0,0,0,0,0,0,0
+P000=60.000,90.000,50.000,0.00,0.00,0.00
+P001=180.000,90.000,50.000,0.00,0.00,0.00
+//INST
+///DATE 2023/05/22 11:12
+///COMM JOB4
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+MOVJ P000 VJ=50.00
+'naar beginpunt
+JUMP *PNP IF B001>0 
+'ga naar pick en place als de B001 variabele groter is dan 0, ga anders naar END
+'B001 kan worden ingevuld in de variabelen lijst, dit is het aantal iteraties
+JUMP *END
+*PNP
+'begin pick and place loop
+SUB B001 1
+'haal 1 van het aantal resterende iteraties af
+CALL JOB:PICK
+'oppakken
+MOVL P001 V=100.00
+'ga naar wegzet plek
+CALL JOB:PLACE
+'zet weg
+CALL JOB:PICK
+'pak weer op
+MOVL P000 V=100.00
+'ga naar originele plek
+CALL JOB:PLACE
+'zet weer weg
+JUMP *PNP IF B001>0
+'blijf doen tot robot B001 niet meer groter dan 0 is.
+*END
+END

@@ -1,0 +1,63 @@
+/JOB
+//NAME JOB5A1
+//POS
+///NPOS 0,0,0,0,0,0
+///USER 9
+///TOOL 0
+///POSTYPE USER
+///RECTAN
+///RCONF 0,0,0,0,0,0,0,0
+P000=60.000,90.000,50.000,0.00,0.00,0.00
+P001=180.000,90.000,30.000,0.00,0.00,0.00
+P002=0.000,0.000,0.000,0.00,0.00,0.00
+//INST
+///DATE 2018/02/02 16:42
+///COMM OPDR1
+///ATTR SC,RW
+///GROUP1 RB1
+NOP
+WAIT OG#(02) = 2
+'wacht tot if panel aanknop is ingedrukt
+DOUT OG#(02) 2
+'zet de  lamp aan
+SET D001 0
+'totale hoogte (in mm*1000)
+SET B001 0
+'blokjes GESTAPELD
+SET B002 3
+'blokjes te STAPELEN
+SET B003 3
+'ACHTERGROND
+SET B30 0
+'voor simulator
+MOVJ P000 VJ=50.00
+'ga naar beginpunt
+*stack
+'begin stack loop
+CALL JOB:PICK
+'oppakken
+ADD D001 20000
+'voeg hoogte blokje toe aan totale hoogte variabele (20mm*1000)
+SETE P002 (3) D001
+'verander z waarde van de shiftpositie naar de totale hoogte variabele (d1)
+SFTON P002
+'shift naar p2
+MOVL P001 V=100.0
+'beweeg naar p1 (maar is geshift met d1 van p2, dus gaat de hoogte in)
+CALL JOB:PLACE
+'wegzetten
+SFTOF
+'shift uit
+MOVL P000 V=100.0
+'terug naar beginpositie
+INC B030
+'volgende blokje voor simulator
+INC B001
+'aantal blokjes gestapeld +1
+DEC B002
+'aantal blokjes te stapelen -1
+JUMP *stack IF B003 > B001
+'ga verder als aantal blokjes te stapelen groter is dan aantal gestapeld
+DOUT OG#(03) 0
+'anders lamp uit
+END
