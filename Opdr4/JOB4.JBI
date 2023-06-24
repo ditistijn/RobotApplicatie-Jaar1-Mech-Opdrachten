@@ -18,8 +18,10 @@ NOP
 MOVJ P000 VJ=50.00
 'naar beginpunt
 JUMP *PNP IF B001>0 
-'ga naar pick en place als de B001 variabele groter is dan 0, ga anders naar END
-'B001 kan worden ingevuld in de variabelen lijst, dit is het aantal iteraties
+'ga naar pick en place als de 
+'B001 variabele groter is dan 0, ga anders naar END
+'B001 kan worden ingevuld in de variabelen lijst, 
+'dit is het aantal iteraties
 JUMP *END
 *PNP
 'begin pick and place loop
